@@ -1,44 +1,57 @@
-# Twilio GPT Realtime Voice Chatbot
+# 🤖 AI Voice Recruiter Assistant
 
-A real-time AI voice chatbot that can **call and converse with users over phone calls using Twilio**, powered by the **OpenAI GPT Realtime API**. The system streams audio between Twilio and the AI model, enabling natural, low-latency conversations.
+An AI-powered voice assistant that **answers calls from recruiters and responds to resume queries in real time**, built on **Twilio Voice** and the **OpenAI GPT Realtime API**. Samarth's personal details, skills, and experience are embedded into the assistant — so it can speak on his behalf, 24/7.
 
-This project demonstrates how to build a **production-style AI voice agent** capable of interacting with humans via phone calls.
+> 📞 **Try it live:** Call **+1 (833) 970-3274** and ask about Samarth's experience, skills, or availability.
+
+---
+
+## What It Does
+
+A recruiter calls the number. The AI picks up, introduces itself as Samarth's assistant, and can answer questions like:
+
+- *"What's his experience with distributed systems?"*
+- *"Has he worked with Kafka or gRPC before?"*
+- *"Is he open to remote roles?"*
+- *"Can you schedule a call with him?"*
+
+The assistant responds naturally using real-time speech, with Samarth's resume context baked in.
 
 ---
 
 ## Features
 
-- 🎙️ Real-time voice conversations over phone calls
-- 📞 Twilio Voice integration for inbound and outbound calls
-- 🤖 OpenAI **GPT Realtime API** for low-latency conversational AI
-- 🌐 WebSocket audio streaming between Twilio and the AI model
-- 🧠 Conversational context handling
-- 🔧 Extensible architecture for tool calling (e.g., scheduling meetings or CRM queries)
+- 🎙️ **Real-time voice conversations** — no hold music, no forms, just a live AI call
+- 📄 **Resume-aware responses** — answers questions about skills, projects, and experience
+- 🛠️ **Tool calling** — can take actions like logging interest or scheduling follow-ups
+- 📞 **Twilio Voice integration** — works on any phone, no app needed
+- 🤖 **OpenAI GPT Realtime API** — low-latency, natural conversational AI
+- 🌐 **WebSocket audio streaming** — continuous two-way audio between caller and AI
 
 ---
 
 ## Architecture
 
 ```
-Caller
+Recruiter calls +1 (833) 970-3274
   │
   ▼
-Twilio Voice
+Twilio Voice (inbound call handler)
   │
   ▼
-WebSocket Media Stream
+WebSocket Media Stream (real-time audio)
   │
   ▼
-Backend Server (FastAPI / Python)
+FastAPI Backend (resume context + tool routing)
   │
   ▼
-OpenAI GPT Realtime API
+OpenAI GPT Realtime API (speech ↔ AI ↔ speech)
   │
   ▼
-AI-generated speech response
+AI responds as Samarth's voice assistant
 ```
 
-The backend server acts as a **proxy**, forwarding audio streams between Twilio and the GPT Realtime API while maintaining conversation state.
+The backend injects Samarth's resume and personal context into the system prompt, so the AI always answers in his context. Tool calls (e.g., scheduling, logging) are handled server-side.
 
 ---
 
@@ -47,28 +60,20 @@ The backend server acts as a **proxy**, forwarding audio streams between Twilio 
 | Technology | Role |
 |---|---|
 | **Python** | Core backend language |
-| **FastAPI** | Async web framework for WebSocket server |
-| **Twilio Voice + Media Streams** | Phone call integration & audio streaming |
-| **OpenAI GPT Realtime API** | Low-latency conversational AI engine |
-| **WebSockets** | Bi-directional audio stream proxy |
-
----
-
-## Example Use Cases
-
-- 🧑‍💼 AI recruiter calling candidates
-- 🎧 AI customer support agents
-- 📅 Automated appointment scheduling
-- 🗣️ Interactive voice assistants
-
----
+| **FastAPI** | Async WebSocket server |
+| **Twilio Voice + Media Streams** | Phone call handling & audio transport |
+| **OpenAI GPT Realtime API** | Conversational AI engine |
+| **WebSockets** | Bi-directional audio streaming |
+| **Tool Calling** | Actions like scheduling & CRM logging |
 
 
 
 ## Future Improvements
 
-- [ ] Voice cloning support
-- [ ] Real-time analytics dashboard
+- [ ] Voice cloning to sound more like Samarth
+- [ ] Calendar integration for live scheduling
+- [ ] CRM logging (save recruiter info + questions)
+- [ ] Real-time transcript dashboard
 
 ---
 
